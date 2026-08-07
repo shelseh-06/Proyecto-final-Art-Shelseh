@@ -29,15 +29,18 @@ def get_db():
 
 
 def init_db():
-    conn = pymysql.connect(
-        host=DB_CONFIG['host'],
-        user=DB_CONFIG['user'],
-        password=DB_CONFIG['password'],
-        charset=DB_CONFIG['charset']
-    )
-    with conn.cursor() as cursor:
-        cursor.execute("CREATE DATABASE IF NOT EXISTS art_shelseh CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    conn.close()
+    try:
+        conn = pymysql.connect(
+            host=DB_CONFIG['host'],
+            user=DB_CONFIG['user'],
+            password=DB_CONFIG['password'],
+            charset=DB_CONFIG['charset']
+        )
+        with conn.cursor() as cursor:
+            cursor.execute("CREATE DATABASE IF NOT EXISTS art_shelseh CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+        conn.close()
+    except pymysql.err.OperationalError:
+        pass
 
     conn = get_db()
     with conn.cursor() as cursor:
