@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ART SHELSEH — Arte que vive en miniatura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdf7f4;
+  --bg-soft:#fbeee9;
+  --pink:#c9899a;
+  --pink-dark:#b97285;
+  --pink-light:#e9c3cd;
+  --ink:#3b2430;
+  --muted:#8d7280;
+  --card:#fffbf9;
+  --border:#f0dfd8;
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+.serif{font-family:'Playfair Display',serif}
+
+/* ---------- NAV ---------- */
+header{position:sticky;top:0;z-index:50;background:var(--bg-soft);border-bottom:1px solid var(--border)}
+.nav{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.logo{line-height:1.05}
+.logo .l1{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;letter-spacing:.05em}
+.logo .l2{font-size:.6rem;letter-spacing:.45em;color:var(--pink);font-weight:500}
+.nav-links{display:flex;gap:28px;font-size:.85rem;color:#6d5a64}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--pink-dark)}
+.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:500;border-radius:999px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn-pink{background:var(--pink);color:#fff;padding:10px 22px;box-shadow:0 4px 14px rgba(201,137,154,.35)}
+.btn-pink:hover{background:var(--pink-dark);transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--border);padding:10px 22px}
+.btn-ghost:hover{border-color:var(--pink-light)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;color:var(--ink);cursor:pointer}
+
+/* ---------- HERO ---------- */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 61px)}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:60px 48px 60px max(48px,calc((100vw - 1160px)/2 + 24px))}
+.eyebrow{font-size:.7rem;letter-spacing:.4em;color:var(--pink);font-weight:500;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.6rem,5.2vw,4.3rem);line-height:1.08;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--pink-light);-webkit-text-stroke:0}
+.hero h1 .accent{color:var(--pink-light)}
+.hero p{color:var(--muted);max-width:400px;font-size:.95rem;margin-bottom:34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.stats{display:flex;gap:0}
+.stat{padding:0 26px;border-right:1px solid var(--border)}
+.stat:first-child{padding-left:0}
+.stat:last-child{border-right:none}
+.stat .num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
+.stat .num sup{color:var(--pink);font-size:.9rem}
+.stat .lbl{font-size:.72rem;color:var(--muted)}
+.hero-img{position:relative;overflow:hidden;clip-path:polygon(9% 0,100% 0,100% 100%,0 100%)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- SECTIONS ---------- */
+section{padding:88px 24px}
+.wrap{max-width:1160px;margin:0 auto}
+.sec-head{text-align:center;max-width:620px;margin:0 auto 46px}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:700;margin-bottom:14px}
+.sec-head h2 .accent{color:var(--pink-light)}
+.sec-head p{color:var(--muted);font-size:.93rem}
+
+/* filters */
+.filters{display:flex;justify-content:center;gap:12px;margin-bottom:42px;flex-wrap:wrap}
+.chip{padding:9px 22px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:.82rem;color:#6d5a64;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
+.chip.active,.chip:hover{background:var(--pink);color:#fff;border-color:var(--pink)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .2s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(160,110,125,.14)}
+.card-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card:hover .card-img img{transform:scale(1.05)}
+.badge{position:absolute;top:14px;left:14px;background:var(--pink);color:#fff;font-size:.62rem;letter-spacing:.12em;font-weight:600;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+.badge.encargo{background:#b98a5e}
+.fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);border:none;cursor:pointer;display:grid;place-items:center;color:#a08491;font-size:.95rem;transition:all .2s}
+.fav:hover,.fav.on{color:var(--pink-dark);background:#fff}
+.card-body{padding:20px 22px 22px}
+.cat{font-size:.62rem;letter-spacing:.32em;color:#b39aa6;text-transform:uppercase;margin-bottom:6px}
+.card-body h3{font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:700;margin-bottom:8px}
+.card-body .desc{font-size:.83rem;color:var(--muted);margin-bottom:18px;min-height:52px}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.price{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700}
+.btn-sm{background:var(--pink);color:#fff;padding:8px 18px;font-size:.78rem}
+.btn-sm:hover{background:var(--pink-dark)}
+
+/* ---------- SOBRE MI ---------- */
+.about{background:var(--bg-soft)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;box-shadow:0 20px 50px rgba(160,110,125,.18)}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:700;margin-bottom:18px}
+.about h2 .accent{color:var(--pink-light)}
+.about p{color:var(--muted);font-size:.93rem;margin-bottom:16px}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.value{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
+.value .ic{font-size:1.2rem;margin-bottom:8px}
+.value h4{font-size:.88rem;margin-bottom:4px}
+.value p{font-size:.78rem;margin:0}
+
+/* ---------- PEDIDOS ---------- */
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.order-copy h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.6vw,2.9rem);font-weight:700;line-height:1.12;margin-bottom:22px}
+.order-copy h2 .accent{color:var(--pink-light)}
+.order-copy>p{color:var(--muted);font-size:.93rem;max-width:430px;margin-bottom:36px}
+.feature{display:flex;gap:16px;margin-bottom:24px}
+.feature .ic{width:42px;height:42px;border-radius:12px;background:var(--bg-soft);display:grid;place-items:center;font-size:1.15rem;flex-shrink:0}
+.feature h4{font-size:.88rem}
+.feature p{font-size:.8rem;color:var(--muted)}
+
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:34px;box-shadow:0 16px 46px rgba(160,110,125,.1)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.f-group{margin-bottom:20px}
+label{display:block;font-size:.75rem;font-weight:500;margin-bottom:7px}
+input,select,textarea{width:100%;background:var(--bg-soft);border:1px solid transparent;border-radius:10px;padding:12px 14px;font-family:'Poppins',sans-serif;font-size:.85rem;color:var(--ink);outline:none;transition:border .2s,background .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--pink-light);background:#fff}
+input::placeholder,textarea::placeholder{color:#bda6b0}
+textarea{resize:vertical;min-height:120px}
+.form-card .btn-pink{width:100%;padding:14px}
+.form-msg{display:none;margin-top:16px;background:#eef7ee;border:1px solid #cfe8cf;color:#3f7a42;font-size:.82rem;border-radius:10px;padding:12px 14px;text-align:center}
+
+/* ---------- FOOTER ---------- */
+footer{background:#2e1d27;color:#d8c4cd;padding:54px 24px 30px}
+.foot-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-logo .l1{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;letter-spacing:.05em}
+.foot-logo .l2{font-size:.6rem;letter-spacing:.45em;color:var(--pink-light);font-weight:500;margin-bottom:14px}
+footer p{font-size:.82rem;max-width:300px}
+footer h5{color:#fff;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+footer ul{list-style:none}
+footer li{margin-bottom:9px;font-size:.83rem}
+footer li a:hover{color:#fff}
+.copy{max-width:1160px;margin:26px auto 0;font-size:.75rem;text-align:center;color:#a68a97}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero{grid-template-columns:1fr}
+  .hero-img{clip-path:none;min-height:340px;order:-1}
+  .hero-copy{padding:48px 24px}
+  .about-grid,.order-grid{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:640px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bg-soft);padding:18px 24px;border-bottom:1px solid var(--border)}
+  .hamburger{display:block}
+  .grid{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .stats{flex-wrap:wrap;gap:14px}
+  .stat{border:none;padding:0}
+  .foot-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#inicio" class="logo">
+      <div class="l1">ART</div>
+      <div class="l2">SHELSEH</div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#creaciones">Creaciones</a>
+      <a href="#videos">Videos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#pedidos">Pedidos</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="#pedidos" class="btn btn-pink">Hacer pedido</a>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio" style="padding:0">
+  <div class="hero-copy">
+    <div class="eyebrow">Hecho a mano con amor</div>
+    <h1>Arte que <span class="accent">vive</span> en miniatura</h1>
+    <p>Maquetas y manualidades únicas, hechas pieza por pieza con dedicación. Cada creación cuenta una historia.</p>
+    <div class="hero-actions">
+      <a href="#creaciones" class="btn btn-pink">Ver creaciones &nbsp;›</a>
+      <a href="#pedidos" class="btn btn-ghost">Pedir encargo</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num"><sup>+</sup>120</div><div class="lbl">Piezas creadas</div></div>
+      <div class="stat"><div class="num">5<sup>★</sup></div><div class="lbl">Valoración</div></div>
+      <div class="stat"><div class="num"><sup>+</sup>80</div><div class="lbl">Clientes felices</div></div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="img\logo.png" alt="Maqueta del sistema solar">
+  </div>
+</section>
+
+<!-- CREACIONES -->
+<section id="creaciones">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Galería</div>
+      <h2>Mis <span class="accent">creaciones</span></h2>
+      <p>Cada pieza está hecha a mano con materiales de calidad y mucho detalle. Explora por categoría.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="chip active" data-f="todo">Todo</button>
+      <button class="chip" data-f="maquetas">Maquetas</button>
+      <button class="chip" data-f="manualidades">Manualidades</button>
+    </div>
+    <div class="grid" id="grid">
+
+      <article class="card reveal" data-cat="maquetas">
+        <div class="card-img">
+          <span class="badge">Popular</span>
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Maqueta del sistema solar.jpeg" alt="Maqueta del Sistema Solar">
+        </div>
+        <div class="card-body">
+          <div class="cat">Maquetas</div>
+          <h3>Maqueta del Sistema Solar</h3>
+          <p class="desc">Maqueta educativa del sistema solar con planetas pintados a mano y detalles orbitales.</p>
+          <div class="card-foot"><span class="price">$85.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="manualidades">
+        <div class="card-img">
+          <span class="badge">Nuevo</span>
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Cartelera sobre el romanticismo.jpeg" alt="Cartelera sobre el Romanticismo">
+        </div>
+        <div class="card-body">
+          <div class="cat">Manualidades</div>
+          <h3>Cartelera: El Romanticismo</h3>
+          <p class="desc">Cartelera decorativa sobre el movimiento romántico con ilustraciones y textos detallados.</p>
+          <div class="card-foot"><span class="price">$42.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="manualidades">
+        <div class="card-img">
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Cartelera sobre los buenos modales.jpeg" alt="Cartelera sobre los Buenos Modales">
+        </div>
+        <div class="card-body">
+          <div class="cat">Manualidades</div>
+          <h3>Cartelera: Buenos Modales</h3>
+          <p class="desc">Cartelera educativa sobre etiqueta y buenos modales con diseño colorido y llamativo.</p>
+          <div class="card-foot"><span class="price">$38.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="manualidades">
+        <div class="card-img">
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Cartelera sobre Paulo Freire.jpeg" alt="Cartelera sobre Paulo Freire">
+        </div>
+        <div class="card-body">
+          <div class="cat">Manualidades</div>
+          <h3>Cartelera: Paulo Freire</h3>
+          <p class="desc">Cartelera dedicada al pedagogo Paulo Freire con sus principales ideas y aportes.</p>
+          <div class="card-foot"><span class="price">$40.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="maquetas">
+        <div class="card-img">
+          <span class="badge encargo">Encargo</span>
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Lapbook sobre la obra-Querido hijo estamos en huelga.jpeg" alt="Lapbook Querido Hijo Estamos en Huelga">
+        </div>
+        <div class="card-body">
+          <div class="cat">Maquetas</div>
+          <h3>Lapbook: Querido Hijo</h3>
+          <p class="desc">Lapbook interactivo sobre la obra "Querido hijo estamos en huelga" con solapas y textos.</p>
+          <div class="card-foot"><span class="price">$55.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="manualidades">
+        <div class="card-img">
+          <button class="fav" aria-label="Guardar en favoritos">♡</button>
+          <img src="img/Portadas de cuadernos.jpeg" alt="Portadas de Cuadernos Artesanales">
+        </div>
+        <div class="card-body">
+          <div class="cat">Manualidades</div>
+          <h3>Portadas de Cuadernos</h3>
+          <p class="desc">Portadas decorativas y personalizadas para cuadernos, hechas con técnicas manuales.</p>
+          <div class="card-foot"><span class="price">$25.000</span><a href="#pedidos" class="btn btn-sm">🗓 Pedir</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section class="about" id="sobre-mi">
+  <div class="wrap about-grid">
+    <div class="about-img reveal">
+      <img src="img/Portadas de cuadernos.jpeg" alt="Portadas de cuadernos hechas a mano">
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Sobre mí</div>
+      <h2>Detrás de cada pieza hay <span class="accent">pasión</span></h2>
+      <p>Hola, soy Shelseh Nicolle Olaya Badillo. Soy estudiante de la Universidad Tecnológica del Chocó Diego Luis Córdoba, cursando el 4to semestre en Ingeniería de Telecomunicaciones e Informática.</p>
+      <p>Tengo un pequeño emprendimiento en el que realizo maquetas, carteleras, dibujos, portadas de cuadernos y más. Cada pieza pasa por mis manos: desde el boceto inicial hasta el último acabado. Trabajo con materiales de calidad para que cada creación dure y cuente su propia historia.</p>
+      <div class="values">
+        <div class="value"><div class="ic">✂️</div><h4>Hecho a mano</h4><p>Cada pieza es única e irrepetible.</p></div>
+        <div class="value"><div class="ic">🎨</div><h4>Personalizado</h4><p>Diseños adaptados a tu idea.</p></div>
+        <div class="value"><div class="ic">🌿</div><h4>Materiales de calidad</h4><p>Duraderos y cuidadosamente elegidos.</p></div>
+        <div class="value"><div class="ic">💌</div><h4>Con amor</h4><p>Dedicación en cada detalle.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDOS -->
+<section id="pedidos">
+  <div class="wrap order-grid">
+    <div class="order-copy reveal">
+      <div class="eyebrow">Pedidos y encargos</div>
+      <h2>¿Tienes algo <span class="accent">especial</span> en mente?</h2>
+      <p>Cuéntame tu idea y con gusto la convierto en realidad. Los encargos personalizados se cotizan según complejidad y materiales. Respondo en menos de 24 horas.</p>
+      <div class="feature">
+        <div class="ic">📦</div>
+        <div><h4>Tiempo de entrega</h4><p>15 a 30 días según la pieza</p></div>
+      </div>
+      <div class="feature">
+        <div class="ic">🚚</div>
+        <div><h4>Envío</h4><p>A toda la región</p></div>
+      </div>
+      <div class="feature">
+        <div class="ic">✨</div>
+        <div><h4>Personalización</h4><p>100% adaptado a tu visión</p></div>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <div class="f-row">
+        <div class="f-group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" placeholder="Tu nombre">
+        </div>
+        <div class="f-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="tu@email.com">
+        </div>
+      </div>
+      <div class="f-group">
+        <label for="tipo">Tipo de pedido</label>
+        <select id="tipo">
+          <option value="">Selecciona una opción</option>
+          <option>Maqueta personalizada</option>
+          <option>Manualidad personalizada</option>
+          <option>Pieza de la galería</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="f-group">
+        <label for="desc">Descripción</label>
+        <textarea id="desc" placeholder="Cuéntame qué tienes en mente..."></textarea>
+      </div>
+      <div class="f-group">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" type="tel" placeholder="Ej: **********">
+      </div>
+      <button class="btn btn-pink" onclick="sendOrder()">Enviar pedido</button>
+      <div class="form-msg" id="formMsg">¡Gracias! Tu pedido fue enviado. Te responderé en menos de 24 horas. 💌</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Videos</div>
+      <h2>Mis trabajos en <span class="accent">acción</span></h2>
+      <p>Mira cómo cobran vida mis creaciones paso a paso.</p>
+    </div>
+    <div class="video-grid reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:26px">
+      <div class="video-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/bxGwZcgFOwY" title="Maqueta del ARN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        <div class="video-info" style="padding:18px 20px 20px">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:6px">Maqueta del ARN</h4>
+          <p style="font-size:.82rem;color:var(--muted)">Proceso de creación de una maqueta educativa del ARN.</p>
+        </div>
+      </div>
+      <div class="video-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/pCrfv2CAxMA" title="Lapbook Querido Hijo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        <div class="video-info" style="padding:18px 20px 20px">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:6px">Lapbook: Querido Hijo</h4>
+          <p style="font-size:.82rem;color:var(--muted)">Presentación del lapbook interactivo sobre la obra literaria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">
+        <div class="l1">ART</div>
+        <div class="l2">SHELSEH</div>
+      </div>
+      <p>Maquetas y manualidades hechas a mano, con dedicación y amor en cada pieza.</p>
+    </div>
+    <div>
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#creaciones">Creaciones</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#pedidos">Pedidos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li>📧 shelsehnicolleolayabadillo@gmail.com</li>
+        <li>📱 Teléfono: 3208525586</li>
+        <li>💬 <a href="https://wa.link/u5nijs" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="copy">© 2026 ART SHELSEH — Hecho a mano con amor.</div>
+</footer>
+
+<script>
+// Filtros de galería
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    const f=chip.dataset.f;
+    document.querySelectorAll('#grid .card').forEach(card=>{
+      card.style.display=(f==='todo'||card.dataset.cat===f)?'':'none';
+    });
+  });
+});
+
+// Favoritos
+document.querySelectorAll('.fav').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.classList.toggle('on');
+    b.textContent=b.classList.contains('on')?'♥':'♡';
+  });
+});
+
+// Envío del formulario a la API
+async function sendOrder(){
+  const nombre=document.getElementById('nombre').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const tipo=document.getElementById('tipo').value;
+  const descripcion=document.getElementById('desc').value.trim();
+  const telefono=document.getElementById('telefono').value.trim();
+  const msg=document.getElementById('formMsg');
+  if(!nombre||!email){
+    msg.style.display='block';
+    msg.style.background='#fdeeee';msg.style.borderColor='#f0cccc';msg.style.color='#a34a4a';
+    msg.textContent='Por favor completa tu nombre y email para enviar el pedido.';
+    return;
+  }
+  try {
+    const res=await fetch('/api/pedidos',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nombre,email,tipo,descripcion,telefono})
+    });
+    const data=await res.json();
+    if(res.ok){
+      msg.style.display='block';
+      msg.style.background='#eef7ee';msg.style.borderColor='#cfe8cf';msg.style.color='#3f7a42';
+      msg.textContent=data.mensaje;
+      document.getElementById('nombre').value='';
+      document.getElementById('email').value='';
+      document.getElementById('tipo').value='';
+      document.getElementById('desc').value='';
+      document.getElementById('telefono').value='';
+    }else{
+      msg.style.display='block';
+      msg.style.background='#fdeeee';msg.style.borderColor='#f0cccc';msg.style.color='#a34a4a';
+      msg.textContent=data.error||'Error al enviar el pedido.';
+    }
+  }catch(e){
+    msg.style.display='block';
+    msg.style.background='#fdeeee';msg.style.borderColor='#f0cccc';msg.style.color='#a34a4a';
+    msg.textContent='Error de conexión con el servidor. Asegúrate de tener Flask corriendo con "python app.py"';
+  }
+}
+
+// Al hacer clic en "Pedir" en un producto, guarda el nombre y lo selecciona en el formulario
+document.querySelectorAll('#grid .btn-sm').forEach(btn=>{
+  btn.addEventListener('click',function(e){
+    e.preventDefault();
+    const card = this.closest('.card');
+    const nombreProd = card.querySelector('h3').textContent.trim();
+    const categoria = card.dataset.cat;
+    sessionStorage.setItem('productoSeleccionado', JSON.stringify({nombre: nombreProd, cat: categoria}));
+    window.location.hash = '#pedidos';
+    seleccionarProducto();
+  });
+});
+
+// Selecciona el producto guardado en el campo "Tipo de pedido"
+function seleccionarProducto(){
+  const raw = sessionStorage.getItem('productoSeleccionado');
+  if(!raw) return;
+  const {nombre, cat} = JSON.parse(raw);
+  const select = document.getElementById('tipo');
+  if(cat === 'maquetas') select.value = 'Maqueta personalizada';
+  else if(cat === 'manualidades') select.value = 'Manualidad personalizada';
+  else {
+    select.value = 'Otro';
+    document.getElementById('desc').value = 'Me interesa: ' + nombre;
+  }
+  sessionStorage.removeItem('productoSeleccionado');
+}
+
+// Aparición al hacer scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
