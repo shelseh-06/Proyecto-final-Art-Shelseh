@@ -9,10 +9,11 @@ ADMIN_USER = os.environ.get('ADMIN_USER', 'admin')
 ADMIN_PASS = os.environ.get('ADMIN_PASS', 'shelseh123')
 
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'art_shelseh',
+    'host': os.environ.get('MYSQLHOST', 'localhost'),
+    'user': os.environ.get('MYSQLUSER', 'root'),
+    'password': os.environ.get('MYSQLPASSWORD', ''),
+    'database': os.environ.get('MYSQLDATABASE', 'art_shelseh'),
+    'port': int(os.environ.get('MYSQLPORT', 3306)),
     'charset': 'utf8mb4',
     'cursorclass': pymysql.cursors.DictCursor
 }
